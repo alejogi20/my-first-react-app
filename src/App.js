@@ -1,22 +1,43 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import reactDom from 'react-dom';
+
+let defaultSlides = require('./defaultSlides.js');
+
+function Slides({slides}){
+  return(
+    <section className="Slides">
+      {slides.map(
+        (currentSlide, index) => (
+          <div key={currentSlide.title} className="slide">
+            <h1>
+              {currentSlide.title}
+            </h1>
+            <h2>
+              {currentSlide.subtitle}
+            </h2>
+            <img src={currentSlide.image}/>
+          </div>
+        )
+      )}
+    </section>
+  );
+}
+
+function Slider({slides}){
+  return(
+    <section className="Slider">
+      <Slides slides= {slides} className="Slides"></Slides>
+    </section>
+  );
+}
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Slider slides={defaultSlides.array} />        
       </header>
     </div>
   );
